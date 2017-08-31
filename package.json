@@ -1,0 +1,22 @@
+{
+  "name": "screenshot-app",
+  "version": "1.0.0",
+  "description": "A simple app that takes a url and generates a full-page screenshot of the website.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myquite/screenshot-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myquite/screenshot-app/issues"
+  },
+  "homepage": "https://github.com/myquite/screenshot-app#readme",
+  "dependencies": {
+    "chromeless": "^1.3.0"
+  }
+}
