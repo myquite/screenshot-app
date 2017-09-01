@@ -1,27 +1,17 @@
 const { Chromeless } = require('chromeless');
-const fs = require('fs');
-const url = 'http://www.google.com';
+const path = require("path");
 
+const url = 'https://myquite.github.io/';
 
 async function run(url) {
   const chromeless = new Chromeless();
 
   const screenshot = await chromeless
     .goto(url)
-    .type('chromeless', 'input[name="q"]')
-    .press(13)
-    .wait('#resultStats')
-    .screenshot()
+    .screenshot({ filePath: path.join(__dirname, 'screen-shot.png') }); // TODO Fix this to add file to local working directory.
 
-
-    fs.writeFile('screenshots.txt', JSON.stringify(screenshot), (error) => {
-      if (error) throw err;
-      console.log('File was saved');
-    });
-
+    console.log(screenshot);
   await chromeless.end();
-
-
 }
 
 run(url).catch(console.error.bind(console));
