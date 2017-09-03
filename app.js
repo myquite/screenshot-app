@@ -1,17 +1,23 @@
-const { Chromeless } = require('chromeless');
-const path = require("path");
+const puppeteer = require('puppeteer');
 
-const url = 'https://myquite.github.io/';
+(async (error) => {
+  const url = 'https://myquite.github.io/';
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: 'networkidle' });
 
-async function run(url) {
-  const chromeless = new Chromeless();
+  // Capture Desktop
+  await page.setViewport({ width: 1440, height: 760 });
+  await page.screenshot({ path: 'screenshot_desktop.png', fullPage: true });
 
-  const screenshot = await chromeless
-    .goto(url)
-    .screenshot({ filePath: path.join(__dirname, 'screen-shot.png') }); // TODO Fix this to add file to local working directory.
+  // Capture Mobile
+  await page.setViewport({ width: 550, height: 760 });
+  await page.screenshot({ path: 'screenshot_mobile.png', fullPage: true });
 
-    console.log(screenshot);
-  await chromeless.end();
-}
+  if (error) {
+    console.log(error);
+  }
+  console.log('Screenshot captured...');
+    browser.close();
+})();
 
-run(url).catch(console.error.bind(console));
